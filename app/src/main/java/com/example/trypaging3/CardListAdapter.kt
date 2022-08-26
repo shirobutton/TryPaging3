@@ -1,10 +1,10 @@
 package com.example.trypaging3
 
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 
-class CardListAdapter : ListAdapter<CardData, CardViewHolder>(diffCallback) {
+class CardListAdapter : PagingDataAdapter<CardData, CardViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         CardViewHolder.create(parent)

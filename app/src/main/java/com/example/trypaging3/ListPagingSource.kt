@@ -14,11 +14,12 @@ class ListPagingSource(
         val prevKey = if (offset <= 0) null else offset - limit
         val nextKey = if (listData.isEmpty()) null else offset + limit
         val itemsAfter = if (nextKey == null) 0 else limit
+        val itemsBefore = if (prevKey == null) 0 else limit
         return LoadResult.Page(
             data = listData,
             prevKey = prevKey,
             nextKey = nextKey,
-            itemsBefore = offset,
+            itemsBefore = itemsBefore,
             itemsAfter = itemsAfter
         )
     }

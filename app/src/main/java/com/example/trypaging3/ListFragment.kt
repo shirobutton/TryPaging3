@@ -18,10 +18,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentListBinding.bind(view)
-        adapter = CardListAdapter()
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        bindView(view)
         viewModel.listData
             .conflate()
             .onEach { adapter?.submitData(it) }
@@ -32,5 +29,14 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         adapter?.refresh()
         adapter = null
         super.onDestroyView()
+    }
+
+    private fun bindView(view: View) {
+        val binding = FragmentListBinding.bind(view)
+        adapter = CardListAdapter()
+        binding.recyclerView.adapter = adapter?.withLoadStateHeaderAndFooter(
+            LoadingProgressAdapter(), LoadingProgressAdapter()
+        )
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 }

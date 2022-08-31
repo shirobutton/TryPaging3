@@ -7,7 +7,7 @@ object ListRepository {
     fun getPagingSource(limit: Int) = ListPagingSource(limit, ::getList)
 
     private suspend fun getList(offset: Int, limit: Int) = kotlin.runCatching {
-        delay(1000)
+        delay(2000)
         List(limit) { CardData(offset + it) }
     }
 }
